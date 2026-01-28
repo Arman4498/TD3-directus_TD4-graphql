@@ -160,7 +160,7 @@ http://localhost:8055/items/Specialite/2?fields[]=libelle
 
 **Requête :**
 ```http
-http://localhost:8055/items/Praticien?fields[]=nom&fields[]=prenom&fields[]=specialite_id.libelle&limit=1
+http://localhost:8055/items/Praticien?fields[]=nom&fields[]=prenom&fields[]=specialite_id.libelle
 ```
 
 <img width="534" height="873" alt="image" src="https://github.com/user-attachments/assets/677d0a78-d282-459e-b824-162af01ab6c3" />
