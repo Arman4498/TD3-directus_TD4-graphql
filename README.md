@@ -236,4 +236,3 @@ Pour vérifier que tout fonctionne correctement :
 - [Documentation Directus](https://docs.directus.io/)
 - [Guide Docker Directus](https://docs.directus.io/self-hosted/docker-guide.html)
 - [API REST Directus](https://docs.directus.io/reference/introduction.html)
-- [API GraphQL Directus](https://docs.directus.io/reference/graphql.html)
