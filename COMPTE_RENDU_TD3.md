@@ -197,7 +197,7 @@ http://localhost:8055/items/Structure?fields[]=nom&fields[]=ville&fields[]=prati
 
 **Requête :**
 ```http
-http://localhost:8055/items/Structure?filter[ville][_contains]=sur&fields[]=nom&fields[]=ville&fields[]=praticien_id.nom&fields[]=praticien_id.prenom&fields[]=praticien_id.specialite_id.libelle
+http://localhost:8055/items/Structure?filter[ville][_contains]=sur&fields[]=nom,ville,praticien_id.nom,praticien_id.prenom,praticien_id.specialite_id.libelle
 ```
 
 <img width="940" height="873" alt="image" src="https://github.com/user-attachments/assets/141e3311-85f0-44dd-acf3-22d15e2d80f5" />
