@@ -1,0 +1,7 @@
+.env
+directus/uploads/*
+!directus/uploads/.gitkeep
+directus/extensions/*
+!directus/extensions/.gitkeep
+postgres_data/
+
