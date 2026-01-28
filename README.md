@@ -6,8 +6,8 @@ Ce projet utilise Directus, un CMS headless, pour gérer une base de données de
 
 Avant de commencer, assurez-vous d'avoir installé :
 
-- [Docker](https://www.docker.com/get-started) (version 20.10 ou supérieure)
-- [Docker Compose](https://docs.docker.com/compose/install/) (version 2.0 ou supérieure)
+- [Docker](https://www.docker.com/get-started) 
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 Vérifiez l'installation avec :
 ```bash
@@ -31,12 +31,6 @@ Démarrez les conteneurs Docker :
 ```bash
 docker-compose up -d
 ```
-
-Cette commande va :
-- Télécharger les images Docker nécessaires (PostgreSQL et Directus)
-- Créer et démarrer les conteneurs
-- Initialiser la base de données PostgreSQL
-- Démarrer l'application Directus
 
 ### 3. Accéder à l'application
 
@@ -75,11 +69,11 @@ PUBLIC_URL=http://localhost:8055
 
 Si vous ne créez pas de fichier `.env`, les valeurs par défaut du `docker-compose.yml` seront utilisées.
 
-## 📊 Restauration de la base de données (optionnel)
+## 📊 Restauration de la base de données 
 
-Si vous avez une sauvegarde SQL (`sauvegarde_td3.sql`), vous pouvez restaurer les données :
+Vous pouvez restaurer les données avec (`sauvegarde_td3.sql`) :
 
-### Méthode 1 : Via PowerShell (Windows) - RECOMMANDÉE
+### Méthode 1 : Via PowerShell (Windows) -
 
 ```powershell
 # Copier le fichier SQL dans le conteneur PostgreSQL
@@ -89,19 +83,11 @@ docker cp sauvegarde_td3.sql directus-postgres:/tmp/sauvegarde_td3.sql
 docker exec -i directus-postgres psql -U directus -d directus_db -f /tmp/sauvegarde_td3.sql
 ```
 
-### Méthode 2 : Via PowerShell avec Get-Content
-
-```powershell
-Get-Content sauvegarde_td3.sql | docker exec -i directus-postgres psql -U directus -d directus_db
-```
-
-### Méthode 3 : Via Bash/Linux/Mac
+### Méthode 2 : Via Bash/Linux/Mac
 
 ```bash
 docker exec -i directus-postgres psql -U directus -d directus_db < sauvegarde_td3.sql
 ```
-
-**Note :** La méthode 1 fonctionne sur tous les systèmes (Windows, Linux, Mac).
 
 ## 🛠️ Commandes utiles
 
@@ -120,9 +106,6 @@ docker-compose logs postgres
 
 ### Arrêter l'application
 ```bash
-# Arrêter les conteneurs (sans supprimer les données)
-docker-compose stop
-
 # Arrêter et supprimer les conteneurs (conserve les volumes)
 docker-compose down
 
@@ -177,49 +160,12 @@ Pour vérifier que tout fonctionne correctement :
 3. **Accéder à l'interface web :**
    Ouvrez http://localhost:8055 dans votre navigateur et connectez-vous avec les identifiants par défaut.
 
-## 🐛 Dépannage
-
-### Le port 8055 est déjà utilisé
-
-Si le port 8055 est déjà utilisé, modifiez la variable `DIRECTUS_PORT` dans le fichier `.env` ou `docker-compose.yml`.
-
-### Erreur de connexion à la base de données
-
-Attendez quelques secondes supplémentaires que PostgreSQL soit complètement démarré. Vérifiez les logs :
-```bash
-docker-compose logs postgres
-```
-
-### Réinitialiser complètement
-
-Si vous rencontrez des problèmes, vous pouvez tout réinitialiser :
-```bash
-# Arrêter et supprimer tout
-docker-compose down -v
-
-# Redémarrer
-docker-compose up -d
-```
-
-### Les données ne persistent pas
-
-Assurez-vous que les volumes Docker sont bien créés :
-```bash
-docker volume ls
-```
-
 ## 📚 Documentation
 
 - [Documentation Directus](https://docs.directus.io/)
 - [Guide Docker Directus](https://docs.directus.io/self-hosted/docker-guide.html)
 - [API REST Directus](https://docs.directus.io/reference/introduction.html)
 
-## 📝 Notes
-
-- Les données sont persistantes grâce aux volumes Docker
-- La base de données PostgreSQL stocke toutes les données dans le volume `postgres_data`
-- Les fichiers uploadés sont stockés dans `./directus/uploads`
-- Les identifiants par défaut sont à changer en production
 
 ## 🎯 Utilisation de l'API REST
 
@@ -232,4 +178,3 @@ curl http://localhost:8055/items/Praticien
 
 ---
 
-**Bon développement ! 🚀**
