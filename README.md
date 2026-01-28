@@ -1,10 +1,19 @@
-# TD3 - Gestion de Praticiens de Santé avec Directus
+# TP Docker : Directus (TD3) et API GraphQL (TD4)
 
-Ce projet utilise Directus, un CMS headless, pour gérer une base de données de praticiens de santé via Docker.
+Ce projet regroupe deux travaux dirigés autour de Directus et d'une base de données de praticiens de santé exécutés avec Docker :
+- **TD3** : mise en place de Directus (CMS headless) pour la gestion des praticiens.
+- **TD4** : exploitation de l'API GraphQL de Directus autour du même jeu de données.
 
-## 📋 Prérequis
+## PDF des TP
 
-Avant de commencer, assurez-vous d'avoir installé :
+- [TD3-directus.pdf](./TD3-directus.pdf)
+- [TD4-graphql.pdf](./TD4-graphql.pdf)
+
+---
+
+### Prérequis
+
+Installez au minimum :
 
 - [Docker](https://www.docker.com/get-started) 
 - [Docker Compose](https://docs.docker.com/compose/install/)
@@ -15,14 +24,56 @@ docker --version
 docker-compose --version
 ```
 
-## 🚀 Démarrage rapide
+---
+
+## Structure globale du projet
+
+```text
+TD3-directus_TD4-graphql/
+├── COMPTE_RENDU_TD3.md
+├── COMPTE_RENDU_TD4.md
+├── TD3-directus.pdf
+├── TD4-graphql.pdf
+├── docker-compose.yml
+├── sauvegarde_td3.sql
+├── sauvegarde_td4.sql
+├── README.md
+└── directus/
+    ├── uploads/
+    └── extensions/
+```
+
+## Liste des TP / exercices
+
+
+### TP 3 : Directus - Gestion de praticiens de santé
+
+- **Fichiers spécifiques** : `sauvegarde_td3.sql`, `COMPTE_RENDU_TD3.md`
+- **Objectif** : installer Directus et manipuler l’API REST sur les praticiens.
+- **Dépendances** : Docker, Docker Compose, Directus, PostgreSQL
+
+[Voir le compte rendu du TD3](./COMPTE_RENDU_TD3.md)
+
+---
+
+### TP 4 : API GraphQL avec Directus
+
+- **Fichiers spécifiques** : `sauvegarde_td4.sql`, `COMPTE_RENDU_TD4.md`
+- **Objectif** : interroger les mêmes données via l’API GraphQL de Directus.
+- **Dépendances** : Docker, Docker Compose, Directus (API REST et GraphQL), PostgreSQL
+
+[Voir le compte rendu du TD4](./COMPTE_RENDU_TD4.md)
+
+---
+
+## Démarrage des services Docker (commun TD3 / TD4)
 
 ### 1. Cloner ou télécharger le projet
 
 Si vous avez le projet dans un dépôt Git :
 ```bash
 git clone <url-du-repo>
-cd TD3-directus
+cd TD3-directus_TD4-graphql
 ```
 
 ### 2. Lancer l'application
@@ -32,7 +83,7 @@ Démarrez les conteneurs Docker :
 docker-compose up -d
 ```
 
-### 3. Accéder à l'application
+### 3. Accéder à Directus
 
 Une fois les conteneurs démarrés, attendez quelques secondes que Directus soit complètement initialisé, puis accédez à :
 
@@ -45,7 +96,12 @@ Une fois les conteneurs démarrés, attendez quelques secondes que Directus soit
 - Base URL : http://localhost:8055
 - Documentation API : http://localhost:8055/server/specs/openapi
 
-## ⚙️ Configuration
+**API GraphQL :**
+- Endpoint : http://localhost:8055/graphql
+
+---
+
+## Configuration
 
 ### Variables d'environnement (optionnel)
 
@@ -69,27 +125,43 @@ PUBLIC_URL=http://localhost:8055
 
 Si vous ne créez pas de fichier `.env`, les valeurs par défaut du `docker-compose.yml` seront utilisées.
 
-## 📊 Restauration de la base de données 
+---
 
-Vous pouvez restaurer les données avec (`sauvegarde_td3.sql`) :
+## Restauration des bases de données
 
-### Méthode 1 : Via PowerShell (Windows) -
+Les fichiers suivants contiennent des sauvegardes PostgreSQL :
+- `sauvegarde_td3.sql` : données pour le TD3 (API REST / Directus).
+- `sauvegarde_td4.sql` : données pour le TD4 (requêtes GraphQL).
+
+### Méthode 1 : via PowerShell (Windows)
 
 ```powershell
 # Copier le fichier SQL dans le conteneur PostgreSQL
 docker cp sauvegarde_td3.sql directus-postgres:/tmp/sauvegarde_td3.sql
 
-# Restaurer la base de données
+# Restaurer la base de données TD3
 docker exec -i directus-postgres psql -U directus -d directus_db -f /tmp/sauvegarde_td3.sql
 ```
 
-### Méthode 2 : Via Bash/Linux/Mac
-
-```bash
-docker exec -i directus-postgres psql -U directus -d directus_db < sauvegarde_td3.sql
+Pour le TD4, adaptez simplement le nom du fichier :
+```powershell
+docker cp sauvegarde_td4.sql directus-postgres:/tmp/sauvegarde_td4.sql
+docker exec -i directus-postgres psql -U directus -d directus_db -f /tmp/sauvegarde_td4.sql
 ```
 
-## 🛠️ Commandes utiles
+### Méthode 2 : via Bash (Linux / macOS)
+
+```bash
+# TD3
+docker exec -i directus-postgres psql -U directus -d directus_db < sauvegarde_td3.sql
+
+# TD4
+docker exec -i directus-postgres psql -U directus -d directus_db < sauvegarde_td4.sql
+```
+
+---
+
+## Commandes Docker utiles
 
 ### Voir les logs
 ```bash
@@ -109,7 +181,7 @@ docker-compose logs postgres
 # Arrêter et supprimer les conteneurs (conserve les volumes)
 docker-compose down
 
-# Arrêter et supprimer les conteneurs ET les volumes (⚠️ supprime les données)
+# Arrêter et supprimer les conteneurs ET les volumes (supprime les données)
 docker-compose down -v
 ```
 
@@ -128,20 +200,10 @@ docker-compose ps
 docker exec -it directus-postgres psql -U directus -d directus_db
 ```
 
-## 📁 Structure du projet
 
-```
-TD3-directus/
-├── docker-compose.yml          # Configuration Docker Compose
-├── sauvegarde_td3.sql          # Sauvegarde de la base de données
-├── COMPTE_RENDU_TD3.md         # Compte rendu du TD
-├── README.md                   # Ce fichier
-└── directus/
-    ├── uploads/                # Fichiers uploadés (persistants)
-    └── extensions/             # Extensions Directus (persistantes)
-```
+---
 
-## 🔍 Vérification de l'installation
+## Vérification de l'installation
 
 Pour vérifier que tout fonctionne correctement :
 
@@ -149,32 +211,29 @@ Pour vérifier que tout fonctionne correctement :
    ```bash
    docker-compose ps
    ```
-   Vous devriez voir deux conteneurs : `directus-app` et `directus-postgres` avec le statut "Up".
+   Vous devriez voir au moins deux conteneurs : `directus-app` et `directus-postgres` avec le statut "Up".
 
 2. **Tester l'API REST :**
    ```bash
    curl http://localhost:8055/server/health
    ```
-   Devrait retourner `{"status":"ok"}`
+   Devrait retourner `{"status":"ok"}`.
 
-3. **Accéder à l'interface web :**
+3. **Tester rapidement l'API GraphQL :**
+   ```bash
+   curl -X POST http://localhost:8055/graphql \
+     -H "Content-Type: application/json" \
+     -d '{"query":"{ __typename }"}'
+   ```
+
+4. **Accéder à l'interface web :**
    Ouvrez http://localhost:8055 dans votre navigateur et connectez-vous avec les identifiants par défaut.
 
-## 📚 Documentation
+---
+
+## Documentation
 
 - [Documentation Directus](https://docs.directus.io/)
 - [Guide Docker Directus](https://docs.directus.io/self-hosted/docker-guide.html)
 - [API REST Directus](https://docs.directus.io/reference/introduction.html)
-
-
-## 🎯 Utilisation de l'API REST
-
-Une fois l'application démarrée, vous pouvez utiliser l'API REST. Consultez le fichier `COMPTE_RENDU_TD3.md` pour des exemples de requêtes.
-
-Exemple de requête pour obtenir la liste des praticiens :
-```bash
-curl http://localhost:8055/items/Praticien
-```
-
----
-
+- [API GraphQL Directus](https://docs.directus.io/reference/graphql.html)
