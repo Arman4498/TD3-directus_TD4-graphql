@@ -56,6 +56,9 @@ Le modèle de domaine représente une application de gestion de praticiens de sa
 - **Structure** : Structures de santé (hôpitaux, cliniques, etc.)
 - **MotifVisite** : Motifs de consultation
 - **MoyenPaiement** : Moyens de paiement acceptés
+<img width="624" height="295" alt="image" src="https://github.com/user-attachments/assets/d2862297-e80d-4a16-9119-839e909c8cf6" />
+
+
 
 ### 2.2 Structure des tables créées
 
