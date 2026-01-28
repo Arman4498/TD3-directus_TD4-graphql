@@ -1,4 +1,4 @@
-<img width="910" height="597" alt="image" src="https://github.com/user-attachments/assets/883db35b-742b-40a2-908f-49095668541e" /># Compte Rendu - TD4 : Requêtes GraphQL avec Directus
+# Compte Rendu - TD4 : Requêtes GraphQL avec Directus
 
 ## 1. Préparation
 
