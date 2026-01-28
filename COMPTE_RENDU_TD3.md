@@ -76,10 +76,16 @@ Le modèle de domaine représente une application de gestion de praticiens de sa
 - `structure_id` (UUID) : Référence vers la Structure (relation Many-to-One)
 - `specialite_id` (INTEGER) : Référence vers la Spécialité (relation Many-to-One)
 
+<img width="910" height="419" alt="image" src="https://github.com/user-attachments/assets/3b03ddf9-66c0-4c99-b268-831e5095e190" />
+
+
 #### Table `Specialite`
 - `id` (INTEGER) : Identifiant unique
 - `libelle` (VARCHAR) : Libellé de la spécialité
 - `description` (VARCHAR) : Description de la spécialité
+
+<img width="910" height="423" alt="image" src="https://github.com/user-attachments/assets/5129feff-5513-4d04-bb8c-b9c64143ffbd" />
+
 
 #### Table `Structure`
 - `id` (UUID) : Identifiant unique
@@ -87,14 +93,23 @@ Le modèle de domaine représente une application de gestion de praticiens de sa
 - `adresse` (VARCHAR) : Adresse de la structure
 - `ville` (VARCHAR) : Ville de la structure
 
+<img width="910" height="419" alt="image" src="https://github.com/user-attachments/assets/f7ef7ad7-f69a-41b4-bc30-e88f8ad5710d" />
+
+
 #### Table `MotifVisite`
 - `id` (INTEGER) : Identifiant unique
 - `libelle` (VARCHAR) : Libellé du motif de visite
 - `specialite_id` (INTEGER) : Référence vers la Spécialité (relation Many-to-One)
 
+<img width="910" height="413" alt="image" src="https://github.com/user-attachments/assets/db32aea0-8d0b-4077-9c30-7e3d4030ff74" />
+
+
 #### Table `MoyenPaiement`
 - `id` (INTEGER) : Identifiant unique
 - `libelle` (VARCHAR) : Libellé du moyen de paiement
+
+<img width="910" height="444" alt="image" src="https://github.com/user-attachments/assets/80e3beb7-d534-47fc-b6cf-b2438d2a7579" />
+
 
 #### Tables de jointure (relations Many-to-Many)
 - `Praticien_MotifVisite` : Relation entre Praticien et MotifVisite
@@ -113,6 +128,9 @@ Le modèle a été créé dans le backoffice Directus en suivant ces étapes :
    - Praticien ↔ MotifVisite (Many-to-Many)
    - Praticien ↔ MoyenPaiement (Many-to-Many)
 4. **Insertion des données** : Ajout des données de test via l'interface Directus
+
+<img width="910" height="421" alt="image" src="https://github.com/user-attachments/assets/4f3816f0-19b0-42d8-8847-8c66ea2e290e" />
+
 
 ---
 
