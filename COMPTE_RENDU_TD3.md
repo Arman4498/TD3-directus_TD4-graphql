@@ -127,14 +127,20 @@ Directus génère automatiquement une API REST pour chaque collection. Voici les
 http://localhost:8055/items/Praticien
 ```
 
+<img width="1487" height="769" alt="image" src="https://github.com/user-attachments/assets/80c1c07c-9077-4b18-a686-7b1b896533c1" />
+
+
 **Réponse :** Retourne la liste complète de tous les praticiens avec tous leurs champs.
 
 ### 3.2 La spécialité d'ID 2
 
 **Requête :**
 ```http
-GET http://localhost:8055/items/Specialite/2
+http://localhost:8055/items/Specialite/2
 ```
+
+<img width="377" height="761" alt="image" src="https://github.com/user-attachments/assets/7aa7a6a3-0530-4b9a-b0ed-fa6533e8db98" />
+
 
 **Réponse :** Retourne les informations complètes de la spécialité avec l'identifiant 2 (id, libelle, description).
 
@@ -142,8 +148,11 @@ GET http://localhost:8055/items/Specialite/2
 
 **Requête :**
 ```http
-GET http://localhost:8055/items/Specialite/2?fields[]=libelle
+http://localhost:8055/items/Specialite/2?fields[]=libelle
 ```
+
+<img width="460" height="182" alt="image" src="https://github.com/user-attachments/assets/e985a020-10a1-40e0-863a-d61f363d03eb" />
+
 
 **Réponse :** Retourne uniquement le champ `libelle` de la spécialité d'ID 2.
 
@@ -151,8 +160,11 @@ GET http://localhost:8055/items/Specialite/2?fields[]=libelle
 
 **Requête :**
 ```http
-GET http://localhost:8055/items/Praticien?fields[]=nom&fields[]=prenom&fields[]=specialite_id.libelle&limit=1
+http://localhost:8055/items/Praticien?fields[]=nom&fields[]=prenom&fields[]=specialite_id.libelle&limit=1
 ```
+
+<img width="534" height="873" alt="image" src="https://github.com/user-attachments/assets/677d0a78-d282-459e-b824-162af01ab6c3" />
+
 
 **Réponse :** Retourne un praticien avec son nom, prénom et le libellé de sa spécialité (via la relation `specialite_id`).
 
@@ -163,16 +175,21 @@ GET http://localhost:8055/items/Praticien?fields[]=nom&fields[]=prenom&fields[]=
 GET http://localhost:8055/items/Structure?fields[]=nom&fields[]=ville&fields[]=praticien_id.nom&fields[]=praticien_id.prenom
 ```
 
+<img width="771" height="873" alt="image" src="https://github.com/user-attachments/assets/be954c22-38b2-42ad-84f7-961f733b6fae" />
+
+
 **Réponse :** Retourne les structures avec leur nom, ville et la liste des praticiens rattachés (nom et prénom) via la relation inverse `praticien_id`.
 
-**Note :** Le nom du champ de relation pour accéder aux praticiens depuis une Structure dépend de la configuration dans Directus. Il peut être `praticien_id` (nom du champ de relation défini) ou le nom de la collection au pluriel selon la configuration.
 
 ### 3.6 Structure avec praticiens et spécialité (libellé)
 
 **Requête :**
 ```http
-GET http://localhost:8055/items/Structure?fields[]=nom&fields[]=ville&fields[]=praticien_id.nom&fields[]=praticien_id.prenom&fields[]=praticien_id.specialite_id.libelle
+http://localhost:8055/items/Structure?fields[]=nom&fields[]=ville&fields[]=praticien_id.nom&fields[]=praticien_id.prenom&fields[]=praticien_id.specialite_id.libelle
 ```
+
+<img width="1001" height="873" alt="image" src="https://github.com/user-attachments/assets/c63399eb-3d64-445d-a1e3-b33723b5298e" />
+
 
 **Réponse :** Retourne les structures avec leur nom, ville, la liste des praticiens (nom, prénom) et le libellé de la spécialité de chaque praticien.
 
@@ -180,8 +197,11 @@ GET http://localhost:8055/items/Structure?fields[]=nom&fields[]=ville&fields[]=p
 
 **Requête :**
 ```http
-GET http://localhost:8055/items/Structure?filter[ville][_contains]=sur&fields[]=nom&fields[]=ville&fields[]=praticien_id.nom&fields[]=praticien_id.prenom&fields[]=praticien_id.specialite_id.libelle
+http://localhost:8055/items/Structure?filter[ville][_contains]=sur&fields[]=nom&fields[]=ville&fields[]=praticien_id.nom&fields[]=praticien_id.prenom&fields[]=praticien_id.specialite_id.libelle
 ```
+
+<img width="940" height="873" alt="image" src="https://github.com/user-attachments/assets/141e3311-85f0-44dd-acf3-22d15e2d80f5" />
+
 
 **Réponse :** Retourne uniquement les structures dont le nom de la ville contient "sur", avec leur nom, ville, et la liste des praticiens (nom, prénom, libellé de la spécialité).
 
@@ -203,19 +223,7 @@ Les relations sont automatiquement détectées par Directus lors de la création
 - **Many-to-One** : Utiliser `{champ_relation}.{champ_souhaité}` (ex: `specialite_id.libelle`)
 - **One-to-Many** : Utiliser le nom du champ de relation défini dans Directus (ex: `praticien_id.nom` pour accéder aux praticiens depuis une Structure)
 
-**Note importante :** Le nom exact du champ de relation pour les relations One-to-Many dépend de la configuration dans Directus. Il peut être visible dans l'interface d'administration de Directus lors de la configuration des relations.
-
 ### 4.3 Sauvegarde
 
 Une sauvegarde complète de la base de données PostgreSQL a été effectuée dans le fichier `sauvegarde_td3.sql`, permettant de restaurer l'ensemble du modèle et des données à tout moment.
 
----
-
-## Conclusion
-
-Ce TD a permis de :
-1. Installer et configurer Directus avec Docker
-2. Créer un modèle de données complexe pour la gestion de praticiens de santé
-3. Utiliser l'API REST de Directus pour interroger les données avec des requêtes simples et complexes incluant des relations
-
-Directus s'est révélé être un outil efficace pour créer rapidement un backend avec une API REST automatique, tout en offrant une interface d'administration intuitive pour la gestion des données.
